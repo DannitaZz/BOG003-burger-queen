@@ -41,7 +41,7 @@ for (let item of breakData){
     prices[item["key"]] = item["precio"]  
   }
 
-export const state = {
+export const initialStateClean= {
     menuData: breakData,
     menuState: initialMenuState,
     totalPrices: 0,
@@ -50,9 +50,9 @@ export const state = {
     comment: '',
 }
 
-export const on_change =  jest.fn(); 
+/* export const on_change =  jest.fn(); 
 export const handleInputChange = jest.fn();
-export const handleCleaner = jest.fn();
+export const handleCleaner = jest.fn(); */
 
 /* const renderOrders = () => 
 render(<TakingOrders 

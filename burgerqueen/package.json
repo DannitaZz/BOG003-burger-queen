@@ -31,7 +31,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --coverage",
     "eject": "react-scripts eject"
-
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +51,8 @@
     ]
   },
   "devDependencies": {
-    "node-sass": "^6.0.1"
+    "@testing-library/react-hooks": "^7.0.2",
+    "node-sass": "^6.0.1",
+    "react-test-renderer": "^17.0.2"
   }
 }

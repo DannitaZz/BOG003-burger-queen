@@ -1,32 +1,45 @@
 import { fireEvent, render} from '@testing-library/react';
-import TakingOrders from './takingOrders'
-
-import {state, handleCleaner, handleInputChange, on_change } from './mockTakingOrders'
+import {renderHook } from '@testing-library/react-hooks'
+import TestRenderer from 'react-test-renderer';
+import { useReducer } from 'react';
+import TakingOrders from './takingOrders';
+import reducer from '../../hooks/reducer';
+import {initialStateClean, handleInputChange} from './mockTakingOrders'
+const {act} = TestRenderer;
 
 describe('TakingOrders', () => {
 
-
+    const initialState = JSON.parse(JSON.stringify(initialStateClean));
+    const { result } = renderHook(() => useReducer(reducer, initialState));
+    const [state, dispatch] = result.current;
+    
     const setup = () => {
         const utils = render(<TakingOrders
             state={state}
             menuData={state.menuData}
             menuState={Object.values(state.menuState)}
-            on_change={on_change}
-            handleInputChange={handleInputChange}
+            on_change={e => dispatch({ type: "changeValue", value: e.target.value, item: e.target.name})}
+            handleInputChange={e => dispatch({type: "changeInputs", fields: e.target.name, inputs: e.target.value})}
             prices={state.totalPrices}
-            handleCleaner={handleCleaner}
-             />)
+            handleCleaner={e => dispatch ({type: 'cleanInputs'})}
+            />)
 
-        const input = utils.getByTestId('a_id')
+        const input = utils.getAllByTestId('a_id')
         const inputName = utils.getByPlaceholderText('Nombre del Cliente');
         const optionOne = utils.getByRole('option', {name: 'Mesas'});
         const sendButton = utils.getByRole('button', {name: 'Enviar'});
         const message = utils.getByTestId('message');
         return {
-          input, inputName, optionOne, sendButton, message, utils,
-          ...utils,
+        input, inputName, optionOne, sendButton, message, utils,
+        ...utils,
         }
-      }
+    }
+
+    act(() => {
+       const  {input} = setup();
+        fireEvent.change(input, {target: {value: '1'}});
+    })
+
     test('Debería renderizar el menú', () => {
         const {utils} = setup();
         utils.getByText('Café americano');
@@ -34,11 +47,12 @@ describe('TakingOrders', () => {
     })
     test('Debería cambiar el estado al cambiar la cantidad', ()=> {
         const {input} = setup();
-        fireEvent.change(input, {target: {value: '1'}});
-        expect(on_change).toHaveBeenCalledTimes(1);
+        /* fireEvent.change(input, {target: {value: '1'}});
+        expect(on_change).toHaveBeenCalledTimes(1); */
         expect(input.value).toBe('1');
+        console.log('Result: ', result.current);
         console.log(input.value);
-        console.log(state.menuState);
+        console.log(state);
     })
     test('Debería guardar el nombre del cliente al escribir en el input', ()=> {
         const {inputName} = setup();
