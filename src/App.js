@@ -24,7 +24,7 @@ function App() {
 
     return(
         // Se realiza el routing para la pagina 
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
             <div>
                 <Header />
                 <Switch>

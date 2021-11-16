@@ -21,7 +21,7 @@ for (let item of breakData){
   }
 
   // Objeto que guarda el estado inicial
-  export const initialStateClean = {
+  export const initialState = {
         
     menuData: breakData,
     menuState: initialMenuState,
@@ -54,9 +54,8 @@ export const reducer = (state, action) => {
     /* changeValue sucede cuando  se cambia la cantidad de los productos y asi retorna el precio de los productos
      y calcula  el total de la cuenta */
     case "changeValue":
-        let newMenuState = state.menuState
-        newMenuState[action.item] = action.value
-        let thePrices = mult(newMenuState, prices); // Guardamos el total de la cuenta en la variable thePrices
+        const newMenuState = {...state.menuState, [action.item]:action.value}
+        const thePrices = mult(newMenuState, prices); // Guardamos el total de la cuenta en la variable thePrices
         return {...state, menuState: newMenuState, totalPrices: thePrices}
     /* changeInputs sucede cuando se escribe el nombre del cliente en el input,
      se selecciona la mesa o se escribe el comentario a cocina y actualiza el estado */
@@ -64,10 +63,10 @@ export const reducer = (state, action) => {
         return {...state, [action.fields]: action.inputs}    
     // cleanInputs limpia los campos retornando el estado inicial limpio
     case "cleanInputs":
-        return initialStateClean
+        return initialState
         
     default:
-    throw new Error();
+    throw new Error('chao');
     } 
 }
 
