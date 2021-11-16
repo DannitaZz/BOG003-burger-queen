@@ -8,7 +8,7 @@ import Kitchen from './components/kitchen/kitchen';
 import './App.scss';
 import {reducer, initialState} from './hooks/reducer';
 import {
-    HashRouter as Router,
+    HashRouter,
     Switch,
     Route
 } from "react-router-dom";
@@ -19,7 +19,7 @@ function App() {
 
     return(
         // Se realiza el routing para la pagina 
-        <Router basename={process.env.PUBLIC_URL}>
+        <HashRouter>
             <div>
                 <Header />
                 <Switch>
@@ -47,7 +47,7 @@ function App() {
                     </Route>
                 </Switch>
             </div>
-        </Router>
+        </HashRouter>
     )
 }
 
