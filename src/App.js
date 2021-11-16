@@ -6,19 +6,14 @@ import TakingOrders from './components/takingOrders/takingOrders';
 import Kitchen from './components/kitchen/kitchen';
 
 import './App.scss';
-import {reducer, initialStateClean} from './hooks/reducer';
+import {reducer, initialState} from './hooks/reducer';
 import {
-    BrowserRouter as Router,
+    HashRouter as Router,
     Switch,
     Route
 } from "react-router-dom";
 
 function App() {
-
-    /* Se crea un copia profunda del estado inicial con dos metodos como lo son: 'JSON.parse (toma una cadena JSON y la 
-       transforma en un objeto de JavaScript)' y 'JSON.stringify (toma un objeto de JavaScript y lo 
-       transforma en una cadena JSON.)' */
-    const initialState = JSON.parse(JSON.stringify(initialStateClean));
     // Se inicializa el useReduce y se le pasa el reducer y el estado inicial que es una copia profunda del limpio
     const [state, dispatch] = useReducer(reducer, initialState);
 
