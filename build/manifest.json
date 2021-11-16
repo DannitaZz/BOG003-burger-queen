@@ -1,7 +1,6 @@
 {
   "short_name": "Burger Queen",
-  "name": "Burger Queen",  
-  "background_color": "#342D57",
+  "name": "Burger Queen",
   "icons": [
     {
       "src": "favicon.ico",
@@ -9,21 +8,19 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192",
-      "type": "image/png",
-      "sizes": "192x192",
-      "purpose": "any maskable"
-
+      "src": "favicon.ico",
+      "type": "image/x-icon",
+      "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "any maskable"
+      "src": "favicon.ico",
+      "type": "image/x-icon",
+      "sizes": "512x512"
     }
   ],
   "start_url": ".",
   "display": "standalone",
   "orientation": "landscape",
-  "theme_color": "#342D57"
+  "theme_color": "#342D57",
+  "background_color": "rgba(26, 22, 47, 1)"
 }
